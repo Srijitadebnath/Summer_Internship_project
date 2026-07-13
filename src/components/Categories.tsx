@@ -89,13 +89,11 @@ const ScrollStackCard: React.FC<ScrollStackCardProps> = ({ category, index, tota
   const startRange = index / total;
   const endRange = (index + 1) / total;
 
-  const scale = isLast
-    ? 1
-    : useTransform(scrollYProgress, [startRange, endRange], [1, targetScale], { clamp: true });
+  const transformedScale = useTransform(scrollYProgress, [startRange, endRange], [1, targetScale], { clamp: true });
+  const scale = isLast ? 1 : transformedScale;
 
-  const opacity = isLast
-    ? 1
-    : useTransform(scrollYProgress, [startRange, endRange], [1, targetOpacity], { clamp: true });
+  const transformedOpacity = useTransform(scrollYProgress, [startRange, endRange], [1, targetOpacity], { clamp: true });
+  const opacity = isLast ? 1 : transformedOpacity;
 
   return (
     <motion.div

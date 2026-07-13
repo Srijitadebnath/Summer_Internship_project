@@ -8,7 +8,7 @@ interface NavLink {
   name: string;
   href: string;
   description: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 interface SocialLink {
@@ -222,17 +222,9 @@ export const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo Section */}
           <a href="#home" className="flex items-center gap-3.5 group focus:outline-none">
-            {/* Styled SVG Logo */}
-            <div className="relative w-14 h-14 bg-primary rounded-2xl flex items-center justify-center overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300">
-              <div className="absolute -top-3 -left-3 w-8 h-8 bg-accent/20 rounded-full blur-sm" />
-              <div className="absolute -bottom-3 -right-3 w-8 h-8 bg-accent/40 rounded-full blur-sm" />
-              {/* SVG Motif combining 'D', 'S', Wrench, and Piping Curves */}
-              <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M6 3v12a3 3 0 0 0 3 3h9" />
-                <path d="M18 15V6a3 3 0 0 0-3-3H9" />
-                <circle cx="9" cy="6" r="1.5" className="fill-white" />
-                <circle cx="15" cy="18" r="1.5" className="fill-accent" />
-              </svg>
+            {/* Store Brand Logo */}
+            <div className="relative w-14 h-14 bg-white rounded-2xl flex items-center justify-center overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300 border border-neutral-cool">
+              <img src="/logo.png" alt="Debnath Sanitary & Hardware Logo" className="w-full h-full object-contain p-0.5" />
             </div>
             {/* Shop Name Typography */}
             <div className="flex flex-col">
@@ -388,11 +380,8 @@ export const Navbar: React.FC = () => {
                 >
                   {/* Logo in drawer */}
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 bg-primary rounded-xl flex items-center justify-center shadow-sm">
-                      <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M6 3v12a3 3 0 0 0 3 3h9" />
-                        <path d="M18 15V6a3 3 0 0 0-3-3H9" />
-                      </svg>
+                    <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm border border-neutral-cool overflow-hidden">
+                      <img src="/logo.png" alt="Logo" className="w-full h-full object-contain p-0.5" />
                     </div>
                     <div className="flex flex-col">
                       <span className="font-display font-black text-base tracking-wide text-primary leading-none">DEBNATH</span>

@@ -81,14 +81,9 @@ export const Footer: React.FC = () => {
           {/* Logo and Brand Overview (Col-span 5) */}
           <div className="col-span-1 lg:col-span-5 flex flex-col items-start gap-5">
             <a href="#home" className="flex items-center gap-3.5 group focus:outline-none">
-              {/* Styled SVG Logo (matches navbar) */}
-              <div className="relative w-12 h-12 bg-primary rounded-xl flex items-center justify-center overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300 border border-white/10">
-                <div className="absolute -top-3 -left-3 w-8 h-8 bg-accent/20 rounded-full blur-sm" />
-                <div className="absolute -bottom-3 -right-3 w-8 h-8 bg-accent/40 rounded-full blur-sm" />
-                <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 3v12a3 3 0 0 0 3 3h9" />
-                  <path d="M18 15V6a3 3 0 0 0-3-3H9" />
-                </svg>
+              {/* Store Brand Logo */}
+              <div className="relative w-12 h-12 bg-white rounded-xl flex items-center justify-center overflow-hidden shadow-md group-hover:scale-105 transition-transform duration-300 border border-white/10">
+                <img src="/logo.png" alt="Debnath Sanitary & Hardware Logo" className="w-full h-full object-contain p-0.5" />
               </div>
               
               {/* Shop Name Typography */}

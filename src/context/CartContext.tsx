@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useContext, useState } from 'react';
 
 export interface ProductItem {
   id: string;
@@ -291,26 +292,23 @@ export const products: ProductItem[] = [
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isCartOpen, setCartOpen] = useState(false);
-
-  // Load cart from localStorage on mount
-  useEffect(() => {
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     const savedCart = localStorage.getItem('debnath_cart');
     if (savedCart) {
       try {
         const parsed = JSON.parse(savedCart) as { id: string; size: string; quantity: number }[];
-        const reconstituted = parsed.map(item => {
+        return parsed.map(item => {
           const product = products.find(p => p.id === item.id);
           if (!product) return null;
           return { product, size: item.size, quantity: item.quantity };
         }).filter((item): item is CartItem => item !== null);
-        setCartItems(reconstituted);
       } catch (err) {
         console.error("Failed to parse cart data:", err);
       }
     }
-  }, []);
+    return [];
+  });
+  const [isCartOpen, setCartOpen] = useState(false);
 
   // Sync cart to localStorage
   const saveCart = (items: CartItem[]) => {
