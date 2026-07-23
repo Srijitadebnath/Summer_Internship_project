@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, CheckCircle2 } from 'lucide-react';
 
@@ -99,12 +99,11 @@ const getBrandLogoFallback = (name: string) => {
           <text x="50%" y="80%" textAnchor="middle" fontFamily="sans-serif" fontWeight="800" fontSize="6" fill="#005FA4" letterSpacing="0.05em">PIPES & FITTINGS</text>
         </svg>
       );
-    case 'ROCA':
+    case 'BATHCARE':
       return (
         <svg viewBox="0 0 100 30" className="w-20 h-auto select-none pointer-events-none">
-          <rect x="0" y="0" width="100" height="30" rx="3" fill="#111111" />
-          <text x="50%" y="55%" textAnchor="middle" fontFamily="Georgia, serif" fontWeight="bold" fontSize="15" fill="#FFFFFF" letterSpacing="0.05em">Roca</text>
-          <path d="M 20 22 Q 50 18, 80 22" stroke="#FFFFFF" strokeWidth="1.5" fill="none" />
+          <rect x="0" y="0" width="100" height="30" rx="3" fill="#0F3A70" />
+          <text x="50%" y="60%" textAnchor="middle" fontFamily="sans-serif" fontWeight="900" fontSize="11" fill="#FFFFFF" letterSpacing="0.05em">BATHCARE</text>
         </svg>
       );
     case 'SUPREME':
@@ -126,7 +125,7 @@ const getBrandLogoFallback = (name: string) => {
 export const Brands: React.FC = () => {
   const brandPartners: BrandItem[] = [
     { name: 'PARRYWARE', type: 'Sanitaryware & Wellness', desc: 'Official Partner', accent: 'from-[#005FA4] to-[#0091FF]', logoFile: 'parryware.png', websiteUrl: 'https://www.parryware.in' },
-    { name: 'ROCA', type: 'Luxury Sanitaryware', desc: 'Premium Partner', accent: 'from-[#111111] to-[#333333]', logoFile: 'roca.png', websiteUrl: 'https://www.roca.in' },
+    { name: 'BATHCARE', type: 'Bath Fittings & Faucets', desc: 'Premium Partner', accent: 'from-[#0F3A70] to-[#1E56A0]', logoFile: 'bathcare.png', websiteUrl: '#' },
     { name: 'SUPREME', type: 'CPVC & SWR Pipelines', desc: 'Official Distributor', accent: 'from-[#D90429] to-[#EF233C]', logoFile: 'supreme.png', websiteUrl: 'https://www.supreme.co.in' },
     { name: 'FINOLEX', type: 'Plumbing & Pipe Networks', desc: 'Official Distributor', accent: 'from-[#FFEB3B] to-[#005FA4]', logoFile: 'finolex.png', websiteUrl: 'https://www.finolexpipes.com' },
     { name: 'V-GUARD', type: 'Instant Water Heaters', desc: 'Official Partner', accent: 'from-[#FF9E00] to-[#FF6000]', logoFile: 'vguard.png', websiteUrl: 'https://www.vguard.in' },
@@ -137,78 +136,8 @@ export const Brands: React.FC = () => {
     { name: 'PENGUIN', type: 'Water Storage Tanks', desc: 'Official Partner', accent: 'from-[#0077B6] to-[#00B4D8]', logoFile: 'penguin.png', websiteUrl: 'https://penguintank.com' },
   ];
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
   const [logoErrors, setLogoErrors] = useState<Record<string, boolean>>({});
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    let animationFrameId: number;
-    const scrollSpeed = 0.8;
-
-    const scroll = () => {
-      if (!isHovered && !isDragging) {
-        container.scrollLeft += scrollSpeed;
-        const halfWidth = container.scrollWidth / 2;
-        if (container.scrollLeft >= halfWidth) {
-          container.scrollLeft -= halfWidth;
-        }
-      }
-      animationFrameId = requestAnimationFrame(scroll);
-    };
-
-    animationFrameId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isHovered, isDragging]);
-
-  const handleScroll = () => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    const halfWidth = container.scrollWidth / 2;
-    if (container.scrollLeft >= halfWidth) {
-      container.scrollLeft -= halfWidth;
-    } else if (container.scrollLeft <= 0) {
-      container.scrollLeft += halfWidth;
-    }
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    setIsDragging(true);
-    const startX = e.pageX - container.offsetLeft;
-    const scrollLeft = container.scrollLeft;
-
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      const x = moveEvent.pageX - container.offsetLeft;
-      const walk = (moveEvent.type === 'touchmove') 
-        ? 0 
-        : (x - startX) * 1.5;
-      
-      container.scrollLeft = scrollLeft - walk;
-
-      const halfWidth = container.scrollWidth / 2;
-      if (container.scrollLeft >= halfWidth) {
-        container.scrollLeft -= halfWidth;
-      } else if (container.scrollLeft <= 0) {
-        container.scrollLeft += halfWidth;
-      }
-    };
-
-    const handleMouseUp = () => {
-      setIsDragging(false);
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
+  const [isPaused, setIsPaused] = useState(false);
 
   const handleImageError = (brandName: string) => {
     setLogoErrors(prev => ({
@@ -242,29 +171,34 @@ export const Brands: React.FC = () => {
           <div className="w-16 h-1 bg-accent rounded-full mt-5" />
         </div>
 
-        {/* Infinite Scroll Container */}
+        {/* Infinite Hardware-Accelerated Marquee Container */}
         <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          onMouseDown={handleMouseDown}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => {
-            setIsHovered(false);
-            setIsDragging(false);
-          }}
-          className="flex overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing snap-x select-none gap-6 pb-6"
-          style={{ WebkitOverflowScrolling: 'touch' }}
+          className="relative w-full overflow-hidden py-4 select-none group"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
         >
-          {/* Double list of brands for seamless looping */}
-          {[...brandPartners, ...brandPartners].map((brand, index) => {
-            const hasError = logoErrors[brand.name];
+          {/* Edge Vignette Blur Gradients */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-neutral-cool/20 via-neutral-cool/10 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-neutral-cool/20 via-neutral-cool/10 to-transparent z-10 pointer-events-none" />
+
+          <div
+            className="flex gap-4 sm:gap-6 w-max animate-marquee group-hover:[animation-play-state:paused] group-active:[animation-play-state:paused]"
+            style={{
+              animationPlayState: isPaused ? 'paused' : 'running'
+            }}
+          >
+            {/* Quadruple list for continuous seamless infinite looping on mobile and desktop */}
+            {[...brandPartners, ...brandPartners, ...brandPartners, ...brandPartners].map((brand, index) => {
+              const hasError = logoErrors[brand.name];
               return (
                 <a
                   key={`${brand.name}-${index}`}
                   href={brand.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-shrink-0 w-[280px] group relative bg-gradient-to-br from-[#EBF2FC] via-[#E1ECFA] to-[#D4E4F7] border border-primary/25 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-primary/15 hover:-translate-y-1.5 cursor-pointer block select-none"
+                  className="flex-shrink-0 w-[240px] sm:w-[280px] group relative bg-gradient-to-br from-[#EBF2FC] via-[#E1ECFA] to-[#D4E4F7] border border-primary/25 rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-primary/15 hover:-translate-y-1.5 cursor-pointer block select-none"
                 >
                   {/* Outer decorative gradient border line */}
                   <div className={`absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r ${brand.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl`} />
@@ -295,13 +229,8 @@ export const Brands: React.FC = () => {
                     {/* Bold Typographic Brand Name */}
                     <h3 className="font-display font-black text-xl text-primary tracking-tight uppercase text-center mb-1">
                       <span className={`bg-gradient-to-r ${brand.accent} bg-clip-text text-transparent`}>
-                        {brand.name === 'ESS ESS' ? 'ESS ESS' : brand.name}
+                        {brand.name}
                       </span>
-                      {brand.name === 'ESS ESS' && (
-                        <span className="text-[10px] block text-neutral-dark/45 font-bold tracking-wider mt-0.5 font-sans">
-                          ASIAN PAINTS
-                        </span>
-                      )}
                       {brand.name === 'BATHSENSE' && (
                         <span className="text-[10px] block text-neutral-dark/45 font-bold tracking-wider mt-0.5 font-sans">
                           ASIAN PAINTS
@@ -322,7 +251,8 @@ export const Brands: React.FC = () => {
                   </div>
                 </a>
               );
-          })}
+            })}
+          </div>
         </div>
 
         {/* Brand guarantee banner */}

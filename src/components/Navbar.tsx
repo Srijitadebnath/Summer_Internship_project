@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MapPin, Mail, Search, Menu, X, Home, Users, Wrench, BookOpen, ShoppingBag } from 'lucide-react';
+import { Phone, MapPin, Mail, Search, Menu, X, Home, Users, Wrench, BookOpen } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
 
 interface NavLink {
   name: string;
@@ -66,7 +65,6 @@ export const Navbar: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const { cartCount, setCartOpen } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -271,22 +269,10 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* DESKTOP VIEW: Actions (Search + Cart + CTA) */}
+          {/* DESKTOP VIEW: Actions (Search + CTA) */}
           <div className="hidden lg:flex items-center gap-4">
             <button className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-neutral-cool text-primary/80 hover:text-primary transition-colors focus:outline-none cursor-pointer" aria-label="Search">
               <Search className="w-4.5 h-4.5" />
-            </button>
-            <button
-              onClick={() => setCartOpen(true)}
-              className="relative w-10 h-10 rounded-full flex items-center justify-center hover:bg-neutral-cool text-primary/80 hover:text-primary transition-colors focus:outline-none cursor-pointer"
-              aria-label="View Cart"
-            >
-              <ShoppingBag className="w-4.5 h-4.5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-accent text-white text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center border border-white shadow-sm animate-pulse">
-                  {cartCount}
-                </span>
-              )}
             </button>
             <a
               href="#contact"
@@ -297,20 +283,8 @@ export const Navbar: React.FC = () => {
             </a>
           </div>
 
-        {/* MOBILE VIEW: Quick Cart + Quick Call + Hamburger toggle */}
+        {/* MOBILE VIEW: Quick Call + Hamburger toggle */}
         <div className="flex lg:hidden items-center gap-2">
-          <button
-            onClick={() => setCartOpen(true)}
-            className="relative w-10 h-10 rounded-full border border-neutral-cool/80 flex items-center justify-center text-primary/80 hover:text-accent transition-colors bg-white shadow-sm cursor-pointer"
-            aria-label="View Cart"
-          >
-            <ShoppingBag className="w-4.5 h-4.5" />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-accent text-white text-[8px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center border border-white shadow-sm">
-                {cartCount}
-              </span>
-            )}
-          </button>
           <a
             href="tel:+919832194842"
             className="w-10 h-10 rounded-full border border-neutral-cool/80 flex items-center justify-center text-primary/80 hover:text-accent transition-colors bg-white shadow-sm"

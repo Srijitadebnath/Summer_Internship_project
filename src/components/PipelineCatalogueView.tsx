@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Search, SlidersHorizontal, ChevronRight, Check, ShoppingBag, Plus, Minus } from 'lucide-react';
+import { ArrowLeft, Search, SlidersHorizontal, ChevronRight, Check, MessageSquare } from 'lucide-react';
 import { CatalogueVideoBanner } from './CatalogueVideoBanner';
-import { useCart, products } from '../context/CartContext';
+import { products } from '../context/CartContext';
 import type { ProductItem } from '../context/CartContext';
 
 interface PipelineCatalogueViewProps {
@@ -10,12 +10,12 @@ interface PipelineCatalogueViewProps {
 }
 
 const ProductCard: React.FC<{ product: ProductItem }> = ({ product }) => {
-  const { cartItems, addToCart, updateQuantity } = useCart();
-  const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
-
-  const cartItem = cartItems.find(
-    (item) => item.product.id === product.id && item.size === selectedSize
-  );
+  const getInquiryUrl = () => {
+    const text = encodeURIComponent(
+      `Hello Debnath Sanitary & Hardware! I am interested in learning more about the ${product.brand} ${product.name} (${product.category}). Could you please share product details and availability?`
+    );
+    return `https://wa.me/919832194842?text=${text}`;
+  };
 
   return (
     <motion.div
@@ -37,90 +37,46 @@ const ProductCard: React.FC<{ product: ProductItem }> = ({ product }) => {
           </span>
         </div>
 
-        {/* Styled SVG Vector Drawing Wrapper */}
-        <div className="w-full h-32 bg-white rounded-xl flex items-center justify-center border border-neutral-cool shadow-xs mb-4 group-hover:scale-[1.02] transition-transform duration-300">
-          {product.icon}
+        {/* Product Image / Icon Wrapper */}
+        <div className="w-full h-44 bg-white rounded-xl flex items-center justify-center border border-neutral-cool shadow-xs mb-4 group-hover:scale-[1.02] transition-transform duration-300 overflow-hidden p-3">
+          {product.image ? (
+            <img src={product.image} alt={product.name} className="h-full w-auto object-contain max-h-36 drop-shadow-sm" />
+          ) : (
+            product.icon
+          )}
         </div>
 
         {/* Product Name */}
-        <h4 className="font-display font-extrabold text-sm text-primary uppercase leading-tight mb-2 tracking-tight group-hover:text-accent transition-colors">
+        <h4 className="font-display font-extrabold text-sm text-primary uppercase leading-tight mb-3 tracking-tight group-hover:text-accent transition-colors">
           {product.name}
         </h4>
 
         {/* Technical specifications */}
-        <div className="border-t border-neutral-cool/80 pt-3 mb-4">
-          <ul className="flex flex-col gap-1.5">
-            {product.specs.map((spec, idx) => (
-              <li key={idx} className="flex items-center gap-1.5 text-[10px] font-medium text-neutral-dark/75">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                <span>{spec}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {product.specs && product.specs.length > 0 && (
+          <div className="border-t border-neutral-cool/80 pt-3 mb-4">
+            <ul className="flex flex-col gap-1.5">
+              {product.specs.map((spec, idx) => (
+                <li key={idx} className="flex items-center gap-1.5 text-[10px] font-medium text-neutral-dark/75">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                  <span>{spec}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div>
-        {/* Size Selection pills */}
-        <div className="mb-4">
-          <label className="block text-[9px] font-black text-primary/60 uppercase tracking-wider mb-2">
-            Select Size
-          </label>
-          <div className="flex flex-wrap gap-1.5 select-none">
-            {product.sizes.map(size => {
-              const isSelected = selectedSize === size;
-              return (
-                <button
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
-                  className={`text-[9px] font-bold px-2.5 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer ${
-                    isSelected
-                      ? 'bg-primary border-primary text-white shadow-xs'
-                      : 'bg-white border-neutral-cool text-primary/70 hover:border-primary/30 hover:text-primary'
-                  }`}
-                >
-                  {size}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Price Range */}
-        <div className="text-[10px] font-extrabold text-neutral-dark/50 uppercase tracking-wider mb-4">
-          Est: <span className="text-primary text-xs font-black normal-case">{product.priceRange}</span>
-        </div>
-
-        {/* Quantity Adjuster or Add to Cart Button */}
-        {cartItem ? (
-          <div className="flex items-center justify-between border border-primary/20 bg-white rounded-xl py-2 px-3 shadow-xs">
-            <button
-              onClick={() => updateQuantity(product.id, selectedSize, cartItem.quantity - 1)}
-              className="w-8 h-8 rounded-lg bg-neutral-cool hover:bg-neutral-cool/80 flex items-center justify-center text-primary font-bold transition-all active:scale-90 cursor-pointer select-none"
-              aria-label="Decrease Quantity"
-            >
-              <Minus className="w-3.5 h-3.5" />
-            </button>
-            <span className="text-xs font-black text-primary select-none">
-              {cartItem.quantity} in Cart
-            </span>
-            <button
-              onClick={() => updateQuantity(product.id, selectedSize, cartItem.quantity + 1)}
-              className="w-8 h-8 rounded-lg bg-neutral-cool hover:bg-neutral-cool/80 flex items-center justify-center text-primary font-bold transition-all active:scale-90 cursor-pointer select-none"
-              aria-label="Increase Quantity"
-            >
-              <Plus className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        ) : (
-          <button
-            onClick={() => addToCart(product, selectedSize)}
-            className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-bold text-[10px] tracking-wider uppercase py-3.5 rounded-xl active:scale-[0.97] transition-all duration-200 cursor-pointer shadow-md shadow-primary/10"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            <span>Add to Enquiry Cart</span>
-          </button>
-        )}
+        {/* Direct Product Inquiry Button */}
+        <a
+          href={getInquiryUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-bold text-[10px] tracking-wider uppercase py-3.5 rounded-xl active:scale-[0.97] transition-all duration-200 cursor-pointer shadow-md shadow-primary/10"
+        >
+          <MessageSquare className="w-4 h-4 text-green-400" />
+          <span>Enquire Product</span>
+        </a>
       </div>
     </motion.div>
   );

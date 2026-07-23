@@ -10,7 +10,6 @@ import { Footer } from './components/Footer';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { PipelineCatalogueView } from './components/PipelineCatalogueView';
 import { BathroomCatalogueView } from './components/BathroomCatalogueView';
-import { CartDrawer } from './components/CartDrawer';
 
 const LandingPage = () => {
   const location = useLocation();
@@ -61,7 +60,6 @@ function App() {
       </main>
       <Footer />
       <WhatsAppWidget />
-      <CartDrawer />
     </div>
   );
 }

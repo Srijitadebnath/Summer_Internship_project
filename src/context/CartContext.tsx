@@ -9,7 +9,8 @@ export interface ProductItem {
   sizes: string[];
   specs: string[];
   priceRange: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
+  image?: string;
 }
 
 export interface CartItem {
@@ -151,141 +152,153 @@ export const products: ProductItem[] = [
   },
   {
     id: 'b1',
-    name: 'Roca Thesis Basin Mixer Faucet',
+    name: 'Auto-Closing Push Pillar Tap',
     category: 'Premium Faucets',
-    brand: 'ROCA',
+    brand: 'PARRYWARE / BATHSENSE',
     sizes: ['Standard'],
-    specs: ['Premium Chrome Finish', 'EcoSmart Flow Control', 'Ceramic Disc Technology'],
-    priceRange: '₹12,400 - ₹18,500 / pc',
-    icon: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 text-blue-600 fill-none" stroke="currentColor" strokeWidth="2">
-        {/* Roca Faucet Vector */}
-        <path d="M 30 75 L 30 45 C 30 35, 40 30, 60 30 L 65 30 L 65 38 L 60 38 C 48 38, 45 42, 45 48 L 45 75" className="fill-blue-50/50" />
-        <rect x="25" y="75" width="25" height="5" rx="1.5" className="fill-gray-200 stroke-gray-500" />
-        {/* Faucet spout end */}
-        <rect x="58" y="30" width="7" height="8" rx="1" className="fill-gray-300 stroke-gray-500" />
-        {/* Single handle lever */}
-        <path d="M 30 40 L 15 35 M 30 40 L 30 35" strokeWidth="3" strokeLinecap="round" />
-        {/* Water droplet */}
-        <path d="M 61.5 48 C 61.5 48, 59 52, 59 55 C 59 57, 60 58.5, 61.5 58.5 C 63 58.5, 64 57, 64 55 C 64 52, 61.5 48, 61.5 48 Z" className="fill-blue-400 stroke-blue-500" strokeWidth="1" />
-        <text x="50" y="87" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#0F3A70" stroke="none">ROCA THESIS</text>
-      </svg>
-    )
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/push_pillar_tap.png'
   },
   {
     id: 'b2',
-    name: 'Parryware Single Lever Concealed Diverter',
-    category: 'Diverters & Valves',
-    brand: 'PARRYWARE',
-    sizes: ['40mm', '45mm'],
-    specs: ['High Flow Rate', 'Smooth Lever Operation', 'Durable Brass Body'],
-    priceRange: '₹3,200 - ₹5,800 / pc',
-    icon: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 text-gray-700 fill-none" stroke="currentColor" strokeWidth="2">
-        {/* Diverter plate */}
-        <rect x="30" y="20" width="40" height="60" rx="6" className="fill-gray-50 stroke-gray-400" />
-        {/* Central dial */}
-        <circle cx="50" cy="40" r="14" className="fill-gray-150 stroke-gray-500" />
-        {/* Knob / handle */}
-        <rect x="47" y="36" width="6" height="24" rx="2" className="fill-gray-300 stroke-gray-600" />
-        {/* Small selector button */}
-        <circle cx="50" cy="65" r="5" className="fill-gray-200 stroke-gray-500" />
-        <circle cx="50" cy="65" r="2" className="fill-red-500 stroke-red-600" />
-        <text x="50" y="90" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#0F3A70" stroke="none">CONCEALED</text>
-      </svg>
-    )
+    name: 'Chrome Wall-Mounted Bib Tap Faucet',
+    category: 'Premium Faucets',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/wall_bib_tap.png'
   },
   {
     id: 'b3',
-    name: 'Bathsense Rain Shower (Overhead)',
-    category: 'Showers & Rails',
-    brand: 'BATHSENSE',
-    sizes: ['8"', '10"', '12"'],
-    specs: ['Self-Cleaning Nozzles', 'Air-injection Technology', 'Ultra-Slim Profile'],
-    priceRange: '₹4,500 - ₹9,200 / pc',
-    icon: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 text-blue-500 fill-none" stroke="currentColor" strokeWidth="2">
-        {/* Shower pipe */}
-        <path d="M 50 15 L 50 25 M 50 15 L 25 15" strokeLinecap="round" />
-        {/* Shower head plate (ultra slim) */}
-        <rect x="25" y="25" width="50" height="5" rx="1" className="fill-gray-200 stroke-gray-500" />
-        {/* Water streams */}
-        <line x1="30" y1="35" x2="30" y2="55" strokeDasharray="2,3" strokeLinecap="round" />
-        <line x1="38" y1="35" x2="38" y2="60" strokeDasharray="2,3" strokeLinecap="round" />
-        <line x1="46" y1="35" x2="46" y2="65" strokeDasharray="2,3" strokeLinecap="round" />
-        <line x1="54" y1="35" x2="54" y2="65" strokeDasharray="2,3" strokeLinecap="round" />
-        <line x1="62" y1="35" x2="62" y2="60" strokeDasharray="2,3" strokeLinecap="round" />
-        <line x1="70" y1="35" x2="70" y2="55" strokeDasharray="2,3" strokeLinecap="round" />
-        <text x="50" y="85" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#0F3A70" stroke="none">RAIN SHOWER</text>
-      </svg>
-    )
+    name: 'Modern Bathroom Vanity Cabinet',
+    category: 'Premium Faucets',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/vanity_cabinet_basin.png'
   },
   {
     id: 'b4',
-    name: 'Ess Ess Single Lever Basin Mixer',
-    category: 'Premium Faucets',
-    brand: 'ESS ESS',
-    sizes: ['Standard', 'Extended Body'],
-    specs: ['Ergonomic Design', 'Quick-Clean Aerator', 'Mirror Look plating'],
-    priceRange: '₹2,800 - ₹5,400 / pc',
-    icon: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 text-sky-600 fill-none" stroke="currentColor" strokeWidth="2">
-        {/* Ess Ess Faucet Vector */}
-        <path d="M 35 75 L 35 40 C 35 32, 45 32, 55 35 L 60 37 M 35 48 C 42 48, 48 44, 48 40" className="fill-sky-50/50" />
-        <rect x="28" y="75" width="24" height="4" rx="1" className="fill-gray-100 stroke-gray-500" />
-        {/* Spout */}
-        <line x1="58" y1="36.5" x2="59" y2="44" strokeWidth="2.5" />
-        {/* Handle */}
-        <path d="M 35 32 L 20 28" strokeWidth="3" strokeLinecap="round" />
-        <text x="50" y="87" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#0F3A70" stroke="none">ESS ESS MIXER</text>
-      </svg>
-    )
+    name: 'Stainless Steel Thermostatic Shower Panel',
+    category: 'Showers & Rails',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/shower_panel_column.png'
   },
   {
     id: 'b5',
-    name: 'Roca concealed flush valve plate',
-    category: 'Diverters & Valves',
-    brand: 'ROCA',
+    name: 'Overhead Round Rain Shower Head',
+    category: 'Showers & Rails',
+    brand: 'PARRYWARE / BATHSENSE',
     sizes: ['Standard'],
-    specs: ['Dual Flush Action', 'Anti-Fingerprint Coating', 'Slim Design Profile'],
-    priceRange: '₹1,800 - ₹3,500 / pc',
-    icon: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 text-gray-600 fill-none" stroke="currentColor" strokeWidth="2">
-        {/* Rectangular plate */}
-        <rect x="20" y="30" width="60" height="40" rx="4" className="fill-gray-50 stroke-gray-400" />
-        {/* Dual buttons */}
-        {/* Left button (Half Flush) */}
-        <path d="M 43 50 A 10 10 0 0 0 35 40 L 35 60 A 10 10 0 0 0 43 50 Z" className="fill-gray-200 stroke-gray-500" />
-        {/* Right button (Full Flush) */}
-        <circle cx="56" cy="50" r="10" className="fill-gray-100 stroke-gray-400" />
-        <circle cx="56" cy="50" r="6" className="fill-white stroke-gray-500" />
-        <text x="50" y="82" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#0F3A70" stroke="none">DUAL FLUSH PLATE</text>
-      </svg>
-    )
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/rain_shower.png'
   },
   {
     id: 'b6',
-    name: 'Bathsense Hand Health Faucet Spray',
+    name: 'Chrome Bidet Health Spray Gun Set',
     category: 'Health Faucets',
-    brand: 'BATHSENSE',
-    sizes: ['1.2m Hose', '1.5m Hose'],
-    specs: ['High-grade ABS Body', 'Anti-Tangle Stainless Hose', 'Ergonomic Trigger'],
-    priceRange: '₹950 - ₹1,800 / pc',
-    icon: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 text-blue-500 fill-none" stroke="currentColor" strokeWidth="2">
-        {/* Spray Gun Head */}
-        <path d="M 45 25 C 45 25, 48 20, 56 20 C 64 20, 68 25, 68 32 C 68 36, 64 38, 60 38 L 45 38 Z" className="fill-gray-100 stroke-gray-500" />
-        {/* Spray nozzles surface */}
-        <line x1="68" y1="26" x2="68" y2="31" strokeWidth="2.5" />
-        {/* Handle */}
-        <rect x="42" y="38" width="10" height="28" rx="2" className="fill-gray-100 stroke-gray-500" transform="rotate(-15 47 52)" />
-        {/* Trigger lever */}
-        <path d="M 38 42 L 35 55" strokeWidth="3" strokeLinecap="round" />
-        {/* Flexible Hose */}
-        <path d="M 47 65 C 47 75, 60 80, 70 75" strokeWidth="4" strokeLinecap="round" strokeDasharray="1,1.5" className="stroke-gray-400" />
-        <text x="50" y="90" textAnchor="middle" fontSize="7" fontWeight="bold" fill="#0F3A70" stroke="none">HEALTH FAUCET</text>
-      </svg>
-    )
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/bidet_health_spray.png'
+  },
+  {
+    id: 'b7',
+    name: 'Flexible Braided Connection Hose',
+    category: 'Health Faucets',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/braided_hose.png'
+  },
+  {
+    id: 'b8',
+    name: 'Chrome Brass Angle Cock Valve',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/angle_valve.png'
+  },
+  {
+    id: 'b9',
+    name: 'Chrome Extension Nipple Set',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/extension_nipples.png'
+  },
+  {
+    id: 'b10',
+    name: 'Dual Flush Actuator Plate',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/flush_actuator_plate.png'
+  },
+  {
+    id: 'b11',
+    name: 'Concealed Flush Tank Cistern',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/concealed_flush_tank.png'
+  },
+  {
+    id: 'b12',
+    name: 'D-Shaped Soft-Close Commode Seat Cover',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/d_shaped_seat_cover.png'
+  },
+  {
+    id: 'b13',
+    name: 'Oval Soft-Close EWC Commode Seat Cover',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/oval_seat_cover.png'
+  },
+  {
+    id: 'b14',
+    name: 'Automatic Sensor Ceramic Urinal Bowl',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/sensor_urinal.png'
+  },
+  {
+    id: 'b15',
+    name: 'Stainless Steel Single Bowl Kitchen Sink',
+    category: 'Diverters & Valves',
+    brand: 'PARRYWARE / BATHSENSE',
+    sizes: ['Standard'],
+    specs: [],
+    priceRange: 'Inquire for price',
+    image: '/assets/images/products/kitchen_sink.png'
   }
 ];
 
